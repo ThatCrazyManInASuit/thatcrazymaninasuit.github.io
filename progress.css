@@ -1,0 +1,142 @@
+:root {
+    --background: #1e2124;
+    --block: #282b30;
+    --subblock: #36393e;
+}
+
+
+html {
+    background-color: var(--background);
+    color: white;
+    font-family: 'Lato', monospace;
+}
+
+#heading-block {
+    background-color:var(--block);
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-top: 50px;
+    padding: 5px 15px;
+    font-size: 3vw;
+    border-radius: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+   
+}
+
+.subtext {
+    font-size: 1vw;
+    margin-top: 7vw;
+    flex: 33%;
+    margin-left: 15px;
+}
+
+#skylar-status-img {
+    max-width: 250px;
+    width: 50%;
+    height: auto;
+}
+
+#skylar-status {
+    margin: auto;
+    flex: 33%;
+    background: var(--subblock);
+    max-width: 33%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#welcome-text {
+    flex: 33%;
+    margin-right: 15px;
+    justify-content: center;
+}
+
+#summary-block,.progress-block {
+    background-color: var(--block);
+    border-radius: 10px;
+    margin: 7vw;
+    padding: 1vw;
+}
+
+.subject {
+    margin: 6vh;
+}
+
+.bar {
+    background-color: rgb(42, 66, 123);
+    border-radius: 10px;
+    height: auto;
+    padding: 1vh;
+    text-align: center;
+}
+
+.bar2 {
+    background-color: rgb(96, 116, 204);
+    height: 100%;
+    border-radius: 10px;
+}
+
+#html-css {
+    width: 100%
+}
+
+#js {
+    width: 81%
+}
+
+#ap-bio {
+    width: 64%
+}
+
+#pre-calc {
+    width: 95%
+}
+
+#trig {
+    width: 85%
+}
+
+#college-algebra {
+    width: 69%
+}
+
+#new-physics {
+    width: 96%
+}
+
+#physics {
+    width: 28%
+}
+
+#ap-chem {
+    width: 15%
+}
+
+#ap-comp {
+    width: 41%
+}
+
+@media screen and (max-width: 1130px) {
+    #heading-block {
+        flex-direction: column;
+        text-align: center;
+    }
+    .subtext {
+        font-size: 12px;
+    }
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+@media (max-width: 600px) {
+    .column {
+      flex: 100%;
+      max-width: 100%;
+    }
+}
