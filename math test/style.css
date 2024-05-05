@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;  
+}
+
+#problem {
+    padding: 0 5vw;
+}
+
+button {
+    margin: 1%;
+    padding: 1%;
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: white;
+    border: none;
+}
+
+#options {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
