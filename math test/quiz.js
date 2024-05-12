@@ -1,4 +1,4 @@
-const questionBank = ['0', '1', '2', '3', '4']
+const questionBank = ['0', '1', '2', '3', '4', '5', '6']
 let problemText, throwoffMargin, rounding, correctAnswer, originTest;
 let numBank = []
 let alphaBank = ['(A) ', '(B) ', '(C) ', '(D) ', '(E) ']
@@ -19,6 +19,7 @@ function factorial(x) {
   }
 
 function generateProblem() {
+    numBank = []
     let question = questionBank[Math.floor(Math.random() * questionBank.length)];
     
     switch (question) {
@@ -43,7 +44,7 @@ function generateProblem() {
             throwoffMargin = .2
             rounding = 1
             originTest = '2024 Region'
-            let i = 0
+            var i = 0
             while (i < 8) {
                 numBank.push(getRandomInt(21)-10)
                 i++
@@ -78,6 +79,34 @@ function generateProblem() {
             var num = (getRandomInt(30)+1) * 10
             problemText = `${num} miles per hour is equivalent to ___________ inches per second.`
             correctAnswer = (num * 17.6).toFixed(rounding)
+            break;
+        case '5': 
+            throwoffMargin = .2
+            rounding = 1
+            originTest = '2024 Region'
+            var i = 0
+            while (i < 8) {
+                numBank.push(getRandomInt(21)-10)
+                i++
+            } 
+            problemText = `Given points A(${numBank[0]},${numBank[1]}), B(${numBank[2]},${numBank[3]}), C(${numBank[4]},${numBank[5]}), D(a,b) and 
+            E(${numBank[6]},c). If F is the midpoint of AB and G is the midpoint of BC, then FG = ______. (nearest tenth)`
+            correctAnswer = (Math.sqrt(Math.pow(((numBank[0]+numBank[2]) / 2) - ((numBank[2]+numBank[4]) / 2), 2) + Math.pow(((numBank[1]+numBank[3]) / 2) - ((numBank[3]+numBank[5]) / 2), 2))).toFixed(rounding)
+            break;
+        case '6': 
+            throwoffMargin = 1
+            rounding = 1
+            originTest = '2024 Region'
+            var i = 0
+            while (i < 8) {
+                numBank.push(getRandomInt(21)-10)
+                i++
+            } 
+            problemText = `Given points A(${numBank[0]},${numBank[1]}), B(${numBank[2]},${numBank[3]}), C(${numBank[4]},${numBank[5]}), D(a,b) and 
+            E(${numBank[6]},c). If AB is perpendicular to CD and a = ${numBank[7]}, then b = _____. (nearest tenth)`
+            var m = (numBank[1]-numBank[3])/(numBank[0]-numBank[2])
+            var b = numBank[5] + numBank[4] / m
+            correctAnswer = ((-1 / m) * numBank[7] + b).toFixed(rounding)
             break;
     }
 
