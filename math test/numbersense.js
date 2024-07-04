@@ -5,11 +5,16 @@ let numBank = []
 let operBank = []
 let operationList = ['+', '-', '*', '/']
 document.addEventListener('DOMContentLoaded', function() {
+    
     for (let i = 0; i < 27 + 1; i++) {
         questionBank.push(i)
     }
     generateProblem(); // Initialize the first problem on load
 });
+function toggleMenu() {
+    var menu = document.getElementById("menu");
+    menu.classList.toggle("show-menu");
+}
 function getRandomInt(max) {
     return Math.floor(Math.random() * max + 1);
 }
@@ -48,7 +53,7 @@ function factorial(x) {
 function generateProblem() {
     numBank = []
     let question = questionBank[getRandomInt(questionBank.length) - 1];
-    
+    estimate = 0
     switch (question) {
         case 0: 
             rounding = 0

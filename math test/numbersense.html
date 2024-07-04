@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <h1>UIL Question Database</h1>
+    <div id="nav-bar">
+        <img src="assets/menu.png" onclick="toggleMenu()">
+        <h1>Number Sense</h1>
+    </div>
+    <div id="menu" class="menu-content">
+        <div id="menu-info">
+            <img src="assets/x.png" onclick="toggleMenu()">
+            <p>UIL Question Database</p>
+            
+        </div>
+        <!-- Your pop-out menu content here -->
+         <div id="menu-options">
+            <div class="page-link"><img src="assets/calculator.png"><a href="#">Calculator</a></div>
+            <div class="page-link"><img src="assets/pi.png" id="pi"><a href="#">Mathematics</a></div>
+         </div>
+         <div class="page-link"><a href="https://thatcrazymaninasuit.github.io/">Back to Home</a></div>
+    </div>
     <h2 id="originTest"></h2>
     <b><div id="problem" style="font-size:24px;"></div></b>
     <input id="userAnswer" type="number" placeholder="Type your answer" style="font-size:18px; margin-top:20px;">

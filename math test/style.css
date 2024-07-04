@@ -1,5 +1,9 @@
-h1 {
-    text-align: center;  
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    margin: 0;
 }
 
 #problem {
@@ -10,7 +14,7 @@ button {
     margin: 1%;
     padding: 1%;
     font-size: 24px;
-    font-family: 'Times New Roman', Times, serif;
+    
     font-weight: bold;
     background-color: white;
     border: none;
@@ -20,4 +24,90 @@ button {
     text-align: center;
     display: flex;
     justify-content: space-around;
+}
+
+#nav-bar {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    border-bottom: 1px solid lightgray;
+}
+
+img {
+    height: 100%;
+    cursor: pointer;
+}
+
+#nav-bar img {
+    height: 50%;
+    margin-left: 20px; 
+}
+
+h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.menu-content {
+    display: block;
+    position: absolute;
+    top: 0; /* Adjust to position below the nav bar */
+    left: 0;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure menu is above other content */
+    height: 50%;
+    width: 0px;
+    overflow: hidden;
+    transition: width .5s;
+    white-space: nowrap;
+    
+}
+
+#menu-info {
+    display: flex;
+    height: 65px;
+    align-items: center;
+    border-bottom: 1px solid darkgrey;
+}
+
+#menu-info p {
+    font-size: 24px;
+    margin-left: 25px;
+}
+
+#menu-info img {
+    height: 20px;
+    margin-left: 20px;
+}
+
+.menu-content.show-menu {
+    width: 375px;
+}
+
+.page-link {
+    height: 20px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-link a {
+    margin: 20px;
+    font-size: 18px;
+}
+
+.menu-content a {
+     /* Adjust padding as needed */
+    text-decoration: none; /* Remove underline for links */
+    color: black; /* Adjust color as needed */
+}
+
+#menu-options {
+    border-bottom: 1px solid darkgrey;
+    margin: 20px;
 }
