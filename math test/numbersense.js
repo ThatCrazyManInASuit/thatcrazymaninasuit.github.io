@@ -29,6 +29,7 @@ function startQuiz() {
     document.getElementById("start").style.display = 'none';
     document.getElementById("userAnswer").style.display = 'unset';
     document.getElementById("enter").style.display = 'unset';
+    document.getElementById("start").classList.remove('show');
     generateProblem();
 }
 
@@ -59,6 +60,8 @@ function factorial(x) {
 }
 
 function setDifficulty(level) {
+    document.getElementById("diff-title").classList.add('hide');
+    document.getElementById("start").classList.add('show');
     let buttons = document.getElementsByClassName('diff-button');
     for (let button of buttons) {
         button.style.backgroundColor = 'lightgray';
@@ -186,12 +189,12 @@ function generateProblem() {
                             break;
                         case 2: 
                             numBank = [getRandomInt(9), getRandomInt(9), getRandomInt(9), getRandomInt(9)];
-                            problemText = `$$${numBank[0]} \times ${numBank[1]} \times ${numBank[2]} \times ${numBank[3]} \times 11$$`
+                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
                             correctAnswer = numBank[0] * numBank[1] * numBank[2] * numBank[3] * 11;
                             break;
                         case 3: 
                             numBank = [getRandomInt(9), getRandomInt(9), (getRandomInt(90) + 9)];
-                            problemText = `$$${numBank[0]} \times ${numBank[1]} \times ${numBank[2]} \times ${numBank[3]} \times 11$$`
+                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
                             correctAnswer = numBank[0] * numBank[1] * numBank[2] * 11;
                             break;
                         case 4:
@@ -203,7 +206,7 @@ function generateProblem() {
                             estimate = true
                             rounding = 3
                             numBank = [(getRandomInt(9)*11.1).toFixed(2), (getRandomInt(9)*11.1).toFixed(2), (getRandomInt(9)*11.1).toFixed(2)];
-                            problemText = `(*)$$${numBank[0]} \times ${numBank[1]} \times ${numBank[2]}$$`
+                            problemText = `(*)$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]}$$`
                             correctAnswer = numBank[0]*numBank[1]*numBank[2];
                             break;
                     }

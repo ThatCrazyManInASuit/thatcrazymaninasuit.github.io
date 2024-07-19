@@ -104,17 +104,24 @@ h1 {
 #quote {
     max-width: 33%;
     text-align: center;
-    margin: 24px auto 0 auto;
-    font-size: 24px;
+    margin: 1.8vw auto 0 auto;
+    font-size: 1.4vw;
     overflow: hidden;
-    height: 120px;
+    height: 72px;
     transition: height .5s;
 }
 
-#quote.hide {
+#quote.hide, #diff-title.hide {
     height: 0;
 }
 
+#diff-title {
+    font-size: 1.8vw;
+    height: 2.5vw;
+    overflow: hidden;
+    transition: height .5s;
+}
+ 
 #difficulty {
     display: flex;
     text-align: center;
@@ -136,7 +143,7 @@ h1 {
     width: 20%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    height: 150px;
+    height: 12vw;
     border-radius: 15px;
 }
 
@@ -145,8 +152,11 @@ h1 {
 }
 
 .example {
-    height: 80px;
-    padding: 20px;
+    display: flex;
+    width: 100%;
+    height: 6vw;
+    margin: auto;
+    justify-content: center;
 }
 
 .diff-button:hover {
@@ -158,7 +168,30 @@ h1 {
 }
 
 #easy .example, #medium .example {
+    font-size: 1.8vw;
+}
+
+#hard .example, #custom .example {
+    font-size: 1.2vw;
+}
+
+.diff-button p:not(#set) {
+    margin: 5% auto;
+    font-size: 1.5vw;
+}
+
+#start {
     font-size: 24px;
+    width: 0;
+    padding: 0;
+    border: none;
+    margin: 0;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
+}
+
+#start.show {
+    width: 66px;
 }
 
 .input-field, #enter, .button-container {
