@@ -4,9 +4,10 @@
 
 body {
     margin: 0;
+    text-align: center;
 }
 
-#problem {
+.centered-text {
     padding: 0 5vw;
 }
 
@@ -14,16 +15,9 @@ button {
     margin: 1%;
     padding: 1%;
     font-size: 24px;
-    
     font-weight: bold;
     background-color: white;
     border: none;
-}
-
-#options {
-    text-align: center;
-    display: flex;
-    justify-content: space-around;
 }
 
 #nav-bar {
@@ -40,7 +34,7 @@ img {
 
 #nav-bar img {
     height: 50%;
-    margin-left: 20px; 
+    margin-left: 20px;
 }
 
 h1 {
@@ -53,17 +47,16 @@ h1 {
 .menu-content {
     display: block;
     position: absolute;
-    top: 0; /* Adjust to position below the nav bar */
+    top: 0;
     left: 0;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* Ensure menu is above other content */
+    z-index: 1;
     height: 50%;
-    width: 0px;
+    width: 0;
     overflow: hidden;
     transition: width .5s;
     white-space: nowrap;
-    
 }
 
 #menu-info {
@@ -99,15 +92,93 @@ h1 {
 .page-link a {
     margin: 20px;
     font-size: 18px;
-}
-
-.menu-content a {
-     /* Adjust padding as needed */
-    text-decoration: none; /* Remove underline for links */
-    color: black; /* Adjust color as needed */
+    text-decoration: none;
+    color: black;
 }
 
 #menu-options {
     border-bottom: 1px solid darkgrey;
     margin: 20px;
+}
+
+#quote {
+    max-width: 33%;
+    text-align: center;
+    margin: 24px auto 0 auto;
+    font-size: 24px;
+    overflow: hidden;
+    height: 120px;
+    transition: height .5s;
+}
+
+#quote.hide {
+    height: 0;
+}
+
+#difficulty {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#input-line {
+    display: flex;
+    justify-content: space-between; /* This will equally space the items */
+    align-items: center; /* Align items vertically centered */
+    padding: 0 50px;
+    font-size: 24px;
+}
+
+.diff-button {
+    margin: auto;
+    background-color: lightgray;
+    width: 20%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    height: 150px;
+    border-radius: 15px;
+}
+
+.diff-button.fade-in {
+    opacity: 1;
+}
+
+.example {
+    height: 80px;
+    padding: 20px;
+}
+
+.diff-button:hover {
+    background-color: darkgray;
+}
+
+.diff-button:active {
+    background-color: gray;
+}
+
+#easy .example, #medium .example {
+    font-size: 24px;
+}
+
+.input-field, #enter, .button-container {
+    display: none;
+}
+
+.input-field, .button-container {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#problem, #originTest {
+    margin-top: 12px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.debug-text {
+    font-size: 24px;
 }
