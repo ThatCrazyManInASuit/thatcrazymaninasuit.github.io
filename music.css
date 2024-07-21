@@ -50,6 +50,13 @@ html {
     border-radius: 10px;
 }
 
+#skylar-status img {
+    max-width: 250px;
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}
+
 #welcome-text {
     flex: 33%;
     margin-right: 15px;

@@ -50,6 +50,10 @@ html {
     border-radius: 10px;
 }
 
+#skylar-status img {
+    border-radius: 10px;
+}
+
 #welcome-text {
     flex: 33%;
     margin-right: 15px;
@@ -81,20 +85,16 @@ html {
     border-radius: 10px;
 }
 
-#html-css {
-    width: 100%
-}
-
 #js {
     width: 81%
 }
 
-#ap-bio {
-    width: 89%
+#ap-bio, #python, #html-css  {
+    width: 100%
 }
 
 #calc {
-    width: 14%
+    width: 91%
 }
 
 #trig {
@@ -119,6 +119,10 @@ html {
 
 #ap-comp {
     width: 41%
+}
+
+#data {
+    width: 50%
 }
 
 @media screen and (max-width: 1130px) {

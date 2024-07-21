@@ -32,10 +32,11 @@ html {
     margin-left: 15px;
 }
 
-#skylar-status-img {
+#skylar-status img {
     max-width: 250px;
     width: 50%;
     height: auto;
+    border-radius: 10px;
 }
 
 #skylar-status {
