@@ -206,6 +206,8 @@ h1 {
 
 #problem, #originTest {
     margin-top: 12px;
+    width: auto;
+    text-wrap: nowrap;
 }
 
 .button-container {
