@@ -1,0 +1,17 @@
+html {
+    background-color: #1e2124;
+}
+
+#welcome-box {
+    background-color: #424549;
+    color: white;
+    height: 60vh;
+    margin: 10%;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Welcome;
+}
