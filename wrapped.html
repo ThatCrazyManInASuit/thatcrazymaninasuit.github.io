@@ -9,10 +9,80 @@
         <link rel="stylesheet" href="wrapped.css">
     </head>
     <body>
+        <div id="track" data-mouse-down-at="0" data-percentage="0" data-prev-percentage="0"></div>
+        <div id="stats">
+            <button onclick="back()" id="back"><img src="math test/assets/x.png"></button>
+            <p id="debug"></p>
+            <div id="s2" class="card">
+                <div>
+                    <p>Your messages were certainly... interesting...</p>
+                    <div class="rand-parent"><p class="random-message"></p></div>
+                    <div class="rand-parent"><p class="random-message"></p></div>
+                    <div class="rand-parent"><p class="random-message"></p></div>
+                    <button onclick="randomMessage()" id="random-message-button">get moar messages!</button>
+                </div>
+            </div>
+            <div id="s3" class="card">
+                <p>Here's how often you messaged each month! </p>
+                <div id="graph">
+                    <div id="row1">
+                        <div id="msg-amt">
+                            <p id="mk7">8</p>
+                            <p id="mk6">7</p>
+                            <p id="mk5">6</p>
+                            <p id="mk4">5</p>
+                            <p id="mk3">4</p>
+                            <p id="mk2">3</p>
+                            <p id="mk1">2</p>
+                            <p id="mk0">1</p>
+                        </div>
+                        <div id="bars">
+                            <div id="m1" class="month-bar"></div>
+                            <div id="m2" class="month-bar"></div>
+                            <div id="m3" class="month-bar"></div>
+                            <div id="m4" class="month-bar"></div>
+                            <div id="m5" class="month-bar"></div>
+                            <div id="m6" class="month-bar"></div>
+                            <div id="m7" class="month-bar"></div>
+                            <div id="m8" class="month-bar"></div>
+                            <div id="m9" class="month-bar"></div>
+                            <div id="m10" class="month-bar"></div>
+                            <div id="m11" class="month-bar"></div>
+                            <div id="m12" class="month-bar"></div>
+                        </div>
+                    </div>
+                    <div id="row2">
+                        <div id="origin"></div>
+                        <div id="months">
+                            <p class="month">Jan</p>
+                            <p class="month">Feb</p>
+                            <p class="month">Mar</p>
+                            <p class="month">Apr</p>
+                            <p class="month">May</p>
+                            <p class="month">June</p>
+                            <p class="month">July</p>
+                            <p class="month">Aug</p>
+                            <p class="month">Sept</p>
+                            <p class="month">Oct</p>
+                            <p class="month">Nov</p>
+                            <p class="month">Dec</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="s4" class="card">
+                <p>Ready for 2025?</p>
+            </div>
+            <div id="s1" data-mouse-down-at="0" class="card">
+                <div><p id="message-count"></p></div>
+            </div>        
+        </div>
         <div id="welcome-box">
             <p id="welcome">Welcome...</p>
-            <input type="text" id="name" name="name"/>
-            <button onclick="retrieve()" id="enter">explore your wrapped</button>
+            <input type="text" id="name" name="name" placeholder="Enter Discord username here!">
+            <p id="invalid-text">Invalid username! Have you even <i>sent</i> a message in <b>All Inquiries</b>?</p>
+            <button onclick="getData()" id="enter">Enter your Wrapped</button>
         </div>
         <script src="wrapped.js" async defer></script>
     </body>
