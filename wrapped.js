@@ -2,12 +2,28 @@ let messages
 const stats = document.getElementById("stats")
 const track = document.getElementById("track")
 const cards = document.getElementsByClassName("card");
+
+const img = document.querySelector('#s2 div button img');
+let rotation = 0;
+
+img.addEventListener('click', function () {
+    rotation += 360; // Increment the rotation angle
+    img.style.transform = `rotate(${rotation}deg)`; // Apply the new rotation
+    img.style.transition = 'transform 0.5s'; // Ensure smooth rotation
+});
+
+img.addEventListener('mouseover', function () {
+  img.style.transform = `rotate(${rotation + 45}deg)`; // Add 45 degrees for hover
+});
+
+img.addEventListener('mouseout', function () {
+  img.style.transform = `rotate(${rotation}deg)`; // Reset to the clicked rotation
+});
+
 async function getData() {
   track.dataset.prevPercentage = 0
-    
 
     let user = document.getElementById("name").value
-    console.log(user)
     const url = "https://thatcrazymaninasuit.github.io/messages.json";
     try {
       const response = await fetch(url);
@@ -29,38 +45,43 @@ async function getData() {
 
       if (!messages) {
         document.getElementById("invalid-text").style.color = "red"
-      } else{
+      } else {
+        document.getElementById("invalid-text").style.color = "transparent"
         randomMessage()
         document.getElementById("welcome-box").style.display = 'none';
         stats.style.display = 'flex';
         
-        
+        let serverTotal = 0
+        for (const [key, value] of Object.entries(json)) {
+          serverTotal = serverTotal + value.length
+        }
+
+        // Message Iterator
+
         let wordCount = 0
-        let a = 1, b = 0
-        let monthData = []
+        let monthData = [0,0,0,0,0,0,0,0,0,0,0,0]
+        let pictureCount = 0
+
         for (let i = 0; i < messages.length; i++) {
           if (messages[i]["Content"] != "null") {
             wordCount = wordCount + messages[i]["Content"].split(" ").length
           }
-          if (i == messages.length - 1) {
-                monthData.push(b)
-                b = 0
-                console.log(a)
-            }
-            if (messages[i]["Month"] == a) {
-                b++
-            } else {
-                a++
-                monthData.push(b)
-                b = 0
-                console.log(a - 1)
-            }
+
+          monthData[messages[i]["Month"] - 1]++
+          
+          if (/(.jpeg|.png|.jpg|.webp)/.test(messages[i]["Attachments"])) {
+            pictureCount++
+          }
+
         }
-
         
+        console.log(monthData)
+        // Message Count
 
-        document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words!\nThat's around ${Math.floor(wordCount/250)} pages!!`;
+        document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!\n\n` + `That's around ${Math.floor(wordCount/250)} pages worth of messages!`;
         
+        // Message by Month
+
         let max = 0
         for (let i = 2; i < Math.max(...monthData); i*=2) {
           max = 2 * i
@@ -68,7 +89,7 @@ async function getData() {
         for (let i = 0; i < monthData.length; i++) {
           document.getElementById(`m${i + 1}`).style.height = `${monthData[i] / max * 100}%`;
         }
-
+        
         const monthBars = document.getElementsByClassName("month-bar");
 
         let array = messages[0]["AuthorID"].toString().match(/\d{9}$/).toString().match(/\d{3}/g)
@@ -85,6 +106,8 @@ async function getData() {
           document.getElementById(`mk${i}`).innerText = Math.floor((i+1)/8 * max)
         }
         
+        // Pictures
+
       }
       
     } catch (error) {
@@ -99,7 +122,7 @@ function back() {
 
 function genRandomMessage() {
   let mRand = Math.floor(Math.random() * messages.length)
-  if (messages[mRand]["Content"] == "null" || !messages[mRand]["Content"]) {
+  if (messages[mRand]["Content"] == "null" || /https/.test(messages[mRand]["Content"])) {
     return genRandomMessage()
   } else {
     return messages[mRand]["Content"]

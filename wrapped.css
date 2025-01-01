@@ -1,15 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/cascadia-code');
 
 html {
-    background-image: url(discord.paper.jpg);
-    font-family: "Inconsolata", serif;
+    background-image: url(wrapped_background.png);
+    font-family: 'Cascadia Code', sans-serif;
     user-select: none;
+    transition: display 2s;
+    background-size: 100% auto;
+    padding: none;
 }
 
 #back {
     height: 40px;
     aspect-ratio: 1 / 1;
     margin: 10px;
+    background: none;
+    border: none;
+    width: 5%;
+    margin: 1% 2%;
 }
 
 img {
@@ -40,8 +47,13 @@ input {
 
 #stats {
     display: none;
-    position: relative;
     height: 100vh;
+    width: 100vw;
+    background-image: url(wrapped/wrapped_background2.png);
+    background-size: 100% auto;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .card {
@@ -65,9 +77,16 @@ input {
 #s2 div button {
     position: absolute;
     bottom: 5%;
-    width: 90%;
-    height: 10%;
-    left: 5%
+    width: auto;
+    height: auto;
+    left: 5%;
+    background: none;
+    border: none;
+}
+
+#s2 div button img {
+    transform: rotate(0deg);
+    transition: transform .5s;
 }
 
 .rand-parent {
