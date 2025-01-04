@@ -9,13 +9,13 @@
         <link rel="stylesheet" href="wrapped.css">
         <link rel="icon" type="image/x-icon" href="wrapped/wrapped_icon.png">
     </head>
-    <body>
+    <body onload="document.body.style.opacity='1'">
         <div id="track" data-mouse-down-at="0" data-percentage="0" data-prev-percentage="0"></div>
         <div id="stats">
             <button onclick="back()" id="back"><img src="wrapped/ChungHand.png" draggable="false"></button>
             <p id="debug"></p>
             <div id="s1" data-mouse-down-at="0" class="card">
-                <div><p id="message-count"></p></div>
+                <div id="message-parent"><p id="message-count"></p><img id="gif" draggable="false"></div>
             </div>
             <div id="s2" class="card">
                 <div>
@@ -74,24 +74,30 @@
                         </div>
                         
                     </div>
-                    <a href="wrapped/allinq_graphed.png" style="font-size: small;">Wanna see how you did compared to others? How about the server as a whole?</a>
+                    <a href="wrapped/allinq_graphed.png" style="font-size: small;">Wanna see how you did compared to others?</a>
                 </div>
             </div>
             <div id="s5" class="card">
-                
+                <div id="search-parent">
+                    <input id="searchbar" onkeyup="search_word()" type="text" name="search" placeholder="Search words...">
+                    <div id="results">
+                        <ul id="words"></ul>
+                    </div>
+                </div>
 
             </div>
             <div id="s4" class="card">
                 <p>Ready for 2025?</p>
                 <img src="wrapped/rotate_cards.png" draggable="false">
-            </div>   
+            </div>
+            <div id="s6" class="card"></div>   
         </div>
         <div id="welcome-box">
             <img src="wrapped/wrapped_title.png">
             <img id="#classified" src="wrapped/ClassifiedAnim.gif">
             <p id="welcome">Welcome...</p>
             <input type="text" id="name" name="name" placeholder="Enter Discord username here!">
-            <p id="invalid-text">Invalid username! Have you even <i>sent</i> a message in <b>All Inquiries</b>?</p>
+            <p id="invalid-text">Invalid username!<br>Have you even <i>sent</i> a message in <b>All Inquiries</b>?</p>
             <button onclick="getData()" id="enter">Enter your Wrapped</button>
         </div>
         <script src="wrapped.js" async defer></script>

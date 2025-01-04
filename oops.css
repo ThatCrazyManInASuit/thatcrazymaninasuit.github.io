@@ -1,0 +1,14 @@
+html {
+    background-image: url(wrapped/oops.jpg);
+    background-size: 100% auto;
+    font-family: 'Courier New', Courier, monospace;
+    color: red;
+    font: bold;
+    font-size: 100pt;
+}
+
+body {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

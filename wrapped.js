@@ -1,3 +1,10 @@
+addEventListener('keydown', function(event) {
+  if (event.key === 'Enter' && document.getElementById("welcome-box").style.display !== 'none') {
+      getData();
+  }
+});
+
+
 let messages
 const stats = document.getElementById("stats")
 const track = document.getElementById("track")
@@ -50,6 +57,7 @@ async function getData() {
         randomMessage()
         document.getElementById("welcome-box").style.display = 'none';
         stats.style.display = 'flex';
+        document.getElementById("words").innerHTML = ""
         
         let serverTotal = 0
         for (const [key, value] of Object.entries(json)) {
@@ -60,25 +68,92 @@ async function getData() {
 
         let wordCount = 0
         let monthData = [0,0,0,0,0,0,0,0,0,0,0,0]
-        let pictureCount = 0
-
+        let wordFrequencies = {};
+        let rank = 1;
+        let prevFrequency = null;
         for (let i = 0; i < messages.length; i++) {
           if (messages[i]["Content"] != "null") {
             wordCount = wordCount + messages[i]["Content"].split(" ").length
-          }
+            
+            if (!/https/.test(messages[i]["Content"])) {
+              let words = messages[i]["Content"].toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
+              words.forEach(word => {
+                if (wordFrequencies[word]) {
+                    wordFrequencies[word]++;
+                } else {
+                    wordFrequencies[word] = 1;
+                }
+            });
 
+            }
+            
+          }
           monthData[messages[i]["Month"] - 1]++
-          
-          if (/(.jpeg|.png|.jpg|.webp)/.test(messages[i]["Attachments"])) {
-            pictureCount++
-          }
-
         }
         
-        console.log(monthData)
-        // Message Count
+        
+        console.log(Object.entries(wordFrequencies).sort((a, b) => b[1] - a[1]));
 
-        document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!\n\n` + `That's around ${Math.floor(wordCount/250)} pages worth of messages!`;
+        let wordArr = Object.entries(wordFrequencies).sort((a, b) => b[1] - a[1])
+        // Message Search
+
+        for (let i = 0; i < wordArr.length; i++) {
+          let currWordBox = document.createElement('div');
+          let currWord = document.createElement('div');
+          let currIndex = document.createElement('div');
+          let currAmt = document.createElement('div');
+          currWordBox.className = 'word-parent'
+          currWord.className = 'word';
+          currWord.innerText = wordArr[i][0]
+          currAmt.innerText = wordArr[i][1]
+          
+          if (wordArr[i][1] !== prevFrequency) {
+            rank = i + 1; // Adjust rank to the current position + 1
+          }
+
+          if (wordArr[i][1] !== prevFrequency) {
+            rank = i + 1; // Adjust rank to the current position + 1
+            currIndex.innerText = rank;
+          } else {
+            currIndex.innerText = `${rank} (tie)`;
+            wordArr[i]
+          }
+          
+          if (wordArr[i][0].length >= 12 && wordArr[i][0].length < 16) {
+            currWord.style.fontSize = 'small'
+          } else if (wordArr[i][0].length >= 16) {
+            currWord.style.fontSize = 'x-small'
+          }
+          prevFrequency = wordArr[i][1]; // Update previous frequency
+
+          document.getElementById('words').appendChild(currWordBox);
+          currWordBox.appendChild(currIndex);
+          currWordBox.appendChild(currWord);
+          currWordBox.appendChild(currAmt);
+        }
+
+        
+        // Message Count
+        if (messages.length >= 4096) {
+          document.getElementById("message-count").innerText = `This year, you posted a whoppin' ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!!!\n\n` + `That's around ${Math.floor(wordCount/250)} pages worth of flippin' messages!!!`;
+          document.getElementById("gif").src = "wrapped/awesome.gif"
+        } else if (messages.length >= 1923) {
+          document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!!\n\n` + `That's around ${Math.floor(wordCount/250)} pages worth of messages!!`;
+          document.getElementById("gif").src = "wrapped/great.gif"
+        } else if (messages.length > 250) {
+          document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!\n\n` + `That's around ${Math.floor(wordCount/250)} pages worth of messages!`;
+          document.getElementById("gif").src = "wrapped/good.gif"
+        } else if (messages.length = 250) {
+          document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!\n\n` + `That's around one page worth of messages.`;
+          document.getElementById("gif").src = "wrapped/okay.gif" 
+        } else if (messages.length < 250) {
+          document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages!\n\n` + `That's around zero pages worth of messages. Wow...`;
+          document.getElementById("gif").src = "wrapped/okay.gif"
+        } else {
+          document.getElementById("message-count").innerText = `This year, you posted ${messages.length} messages with ${wordCount} words, making up ${Math.round(messages.length/serverTotal * 100000)/1000}% of all ${serverTotal} messages.\n\n` + `That's only around ${Math.floor(wordCount/250)} pages worth of messages...`;
+          document.getElementById("gif").src = "wrapped/okay.gif"
+        }
+       
         
         // Message by Month
 
@@ -106,7 +181,7 @@ async function getData() {
           document.getElementById(`mk${i}`).innerText = Math.floor((i+1)/8 * max)
         }
         
-        // Pictures
+
 
       }
       
@@ -136,6 +211,21 @@ function randomMessage() {
   }
 }
 
+function search_word() {
+  let input = document.getElementById('searchbar').value
+  input = input.toLowerCase();
+  let x = document.getElementsByClassName('word');
+
+  for (i = 0; i < x.length; i++) {
+      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+          x[i].parentElement.style.display = "none";
+      }
+      else {
+          x[i].parentElement.style.display = "flex";
+      }
+  }
+}
+
 window.onmousedown = e => {
   track.dataset.mouseDownAt = e.clientX;
 }
@@ -151,11 +241,10 @@ window.onmousemove = e => {
   track.dataset.percentage = current
   
   for (let i = 0; i < cards.length; i++) {
-    cards[i].style.transform = `translate(${70 * Math.sin(current + (i + 1) / cards.length * 2 * Math.PI)}%, 0%) scale(${.25 / 2 * (Math.cos(current + (i + 1) / cards.length * 2 * Math.PI) - 1) + 1})`
+    cards[i].style.transform = `translate(${90 * Math.sin(current + (i + 1) / cards.length * 2 * Math.PI)}%, 0%) scale(${.25 / 2 * (Math.cos(current + (i + 1) / cards.length * 2 * Math.PI) - 1) + 1})`
     cards[i].style.opacity = .375 * Math.cos(current + (i + 1) / cards.length * 2 * Math.PI) + .625
     cards[i].style.zIndex = Math.floor(cards[i].style.opacity * 1000)
   }
-  document.getElementById("debug").innerText = parseFloat(track.dataset.prevPercentage) + percentage
 } 
 
 window.onmouseup = e => {
