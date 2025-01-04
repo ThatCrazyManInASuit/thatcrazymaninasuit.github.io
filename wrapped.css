@@ -209,3 +209,12 @@ input {
 .word-parent div {
     width: 25%;
 }
+
+#green {
+    width: 5px;
+    height: 5px;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    right: 200px;
+    bottom: 5px;
+}
