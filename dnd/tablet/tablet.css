@@ -1,0 +1,57 @@
+html {
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.magic-word {
+  display:inline-block;          /* makes word a single wrap unit   */
+  white-space:nowrap;            /* forbid breaks *inside* the word */
+}
+
+/* space element so you can still animate / glow it */
+.magic-space {
+  display:inline-block;
+  width:0.6em;                   /* approximate normal space width  */
+}
+
+.magic-text {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f19831;
+  perspective: 500px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeRiseIn 2s ease-out forwards;
+}
+
+.magic-text span {
+  display: inline-block;
+  transform-origin: center bottom;
+  animation-name: sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+
+  /* Hollow text with outline and glow */
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(241, 152, 49); /* the outline color */
+  text-shadow:
+    5px 5px #613400,
+    0 0 20px #f19831,
+    0 0 30px #f19831;
+}
+
+@keyframes sway {
+  0%   { transform: rotateZ(0deg) translateY(0px); }
+  25%  { transform: rotateZ(2.5deg) translateY(-1.5px); }
+  50%  { transform: rotateZ(0deg) translateY(0px); }
+  75%  { transform: rotateZ(-2.5deg) translateY(-1.5px); }
+  100% { transform: rotateZ(0deg) translateY(0px); }
+}
+
+@keyframes fadeRiseIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
