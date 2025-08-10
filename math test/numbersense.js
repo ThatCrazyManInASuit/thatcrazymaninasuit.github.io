@@ -1,8 +1,8 @@
-const questionBank = Array.from({ length: 3 }, (_, i) => i);
+let difficultyBlocks = []
+
 let problemText, rounding, correctAnswer, originTest, estimate, difficulty;
 let right = attempted = 0 
 let numBank = [];
-const operationList = ['+', '-', '*', '/'];
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('userAnswer').style.display = 'none';
@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
             checkAnswer();
         }
     });
-    const difficultyBlocks = document.querySelectorAll('.diff-button');
-            difficultyBlocks.forEach((block, index) => {
-                setTimeout(() => {
-                    block.classList.add('fade-in');
-                }, index * 450);
-            });
+    difficultyBlocks = document.querySelectorAll('.diff-button');
+    difficultyBlocks.forEach((block, index) => {
+        setTimeout(() => {
+            block.classList.add('fade-in');
+        }, index * 450);
+    });
 });
 
 function toggleMenu() {
@@ -25,20 +25,23 @@ function toggleMenu() {
 }
 
 function startQuiz() {
-    document.getElementById("quote").classList.add('hide');
-    document.getElementById("start").style.display = 'none';
-    document.getElementById("userAnswer").style.display = 'unset';
-    document.getElementById("enter").style.display = 'unset';
-    document.getElementById("start").classList.remove('show');
-    generateProblem();
+    if (difficulty == 'custom') {
+        difficultyBlocks.forEach((block, index) => {
+            block.classList.add('hide');
+        });
+        document.getElementById("error").classList.add('show');
+    } else {
+        document.getElementById("quote").classList.add('hide');
+        document.getElementById("start").style.display = 'none';
+        document.getElementById("userAnswer").style.display = 'unset';
+        document.getElementById("enter").style.display = 'unset';
+        document.getElementById("start").classList.remove('show');
+        generateProblem();
+    }
 }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max + 1);
-}
-
-function arithmetic() {
-    return operationList[Math.floor(Math.random() * 2)];
 }
 
 function applyOperator(operator, num1, num2) {
@@ -61,24 +64,30 @@ function factorial(x) {
 
 function setDifficulty(level) {
     document.getElementById("diff-title").classList.add('hide');
-    document.getElementById("start").classList.add('show');
-    let buttons = document.getElementsByClassName('diff-button');
-    for (let button of buttons) {
-        button.style.backgroundColor = 'lightgray';
+    if (level == 'custom') {
+        difficultyBlocks.forEach((block, index) => {
+            block.classList.add('hide');
+        });
+        document.getElementById("custom-menu").classList.add('show');
+    } else {
+        let buttons = document.getElementsByClassName('diff-button');
+        for (let button of buttons) {
+            button.style.backgroundColor = 'lightgray';
+        }
+        document.getElementById(level).style.backgroundColor = 'darkgray';
     }
-    document.getElementById(level).style.backgroundColor = 'darkgray';
     difficulty = level;
+    document.getElementById("start").classList.add('show');
 }
 
 function generateProblem() {
     numBank = [];
-    let question = questionBank[getRandomInt(questionBank.length) - 1];
     rounding = 0
     estimate = false;
 
     const operations = [
         function() {
-            originTest = 'FOILing/LIOFing';
+            originTest = 'Heath NS Tricks 1.1';
             switch (difficulty) {
                 case 'easy':
                     numBank = [(getRandomInt(90) + 9), (getRandomInt(90) + 9)];
@@ -99,10 +108,10 @@ function generateProblem() {
             
         },
         function() {
-            originTest = 'Multiplying by 11s';
+            originTest = 'Heath NS Tricks 1.2.1';
             switch (difficulty) {
                 case 'easy':
-                    switch(getRandomInt(15)) {
+                    switch(getRandomInt(13)) {
                         case 1:
                             numBank = [(getRandomInt(90) + 9)];
                             problemText = `11 x ${numBank[0]}`
@@ -132,125 +141,137 @@ function generateProblem() {
                             rounding = 3
                             break;
                         case 6: 
-                            numBank = [getRandomInt(9), getRandomInt(9)];
-                            problemText = `${numBank[0]}00${numBank[1]} x 111`
-                            correctAnswer = numBank[0] * 111000 + numBank[1] * 111;
-                            break;
-                        case 7: 
                             numBank = [getRandomInt(9), getRandomInt(9), getRandomInt(9)];
                             problemText = `${numBank[0]} x ${numBank[1]} x ${numBank[2]} x 11`
                             correctAnswer = numBank[0] * numBank[1] * numBank[2] * 11;
                             break;
-                        case 8: 
-                            numBank = [getRandomInt(9), getRandomInt(9)];
-                            problemText = `${numBank[0]}${numBank[0]}${numBank[1]}${numBank[1]} / 11`
-                            correctAnswer = numBank[0] * 100 + numBank[1];
-                            break;
-                        case 9: 
+                        case 7: 
                             numBank = [(getRandomInt(9) * 11)];
                             problemText = `${numBank[0]} * 11`
                             correctAnswer = numBank[0] * 11;
                             break;
-                        case 10: 
-                            rounding = 2
-                            numBank = [getRandomInt(9), getRandomInt(9)];
-                            problemText = `${numBank[0]}0.0${numBank[1]} x 11`
-                            correctAnswer = numBank[0] * 110 + numBank[1] * .11;
-                            break;
-                        case 11: 
+                        case 8: 
                             rounding = 2
                             numBank = [(getRandomInt(90)+9)];
                             problemText = `11% of ${numBank[0]}`
                             correctAnswer = numBank[0] * .11;
                             break;
-                        case 12: 
-                            numBank = [getRandomInt(9), getRandomInt(9)];
-                            problemText = `${numBank[0]}00${numBank[1]} x 11`
-                            correctAnswer = numBank[0] * 11000 + numBank[1] * 11;
+                        case 9: 
+                            problemText = `$$11^3$$`
+                            correctAnswer = Math.pow(11, 3);
                             break;
-                        case 13: 
-                            numBank = [(getRandomInt(2) + 2)];
-                            problemText = `$$11^${numBank[0]}$$`
-                            correctAnswer = Math.pow(11, numBank[0]);
-                            break;
-                        case 14: 
+                        case 10: 
                             numBank = [(getRandomInt(9)*11), (getRandomInt(9)*11)];
                             problemText = `$$${numBank[0]} \\times ${numBank[1]}$$`
                             correctAnswer = numBank[0]*numBank[1];
                             break;
-                        case 15:
+                        case 11:
                             estimate = true
                             numBank = [(getRandomInt(9)*11), (getRandomInt(9)*11), (getRandomInt(9)*11)];
                             problemText = `(*)$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]}$$`
                             correctAnswer = numBank[0]*numBank[1]*numBank[2];
                             break;    
-                    }   
-                    break;
-                case 'medium': 
-                    switch(getRandomInt(5)) {
-                        case 1:
+                        case 12:
                             numBank = [(getRandomInt(900) + 99) * 11];
                             problemText = `${numBank[0]} / 11`
                             correctAnswer = numBank[0] / 11;
                             break;
-                        case 2: 
-                            numBank = [getRandomInt(9), getRandomInt(9), getRandomInt(9), getRandomInt(9)];
-                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
-                            correctAnswer = numBank[0] * numBank[1] * numBank[2] * numBank[3] * 11;
-                            break;
-                        case 3: 
-                            numBank = [getRandomInt(9), getRandomInt(9), (getRandomInt(90) + 9), getRandomInt(9)];
-                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
-                            correctAnswer = numBank[0] * numBank[1] * numBank[2] * 11;
-                            break;
-                        case 4:
+                        case 13:
                             numBank = [(getRandomInt(90) + 9)];
                             problemText = `121 x ${numBank[0]}`
                             correctAnswer = numBank[0] * 121;
                             break;
-                        case 5:
+                        case 14:
                             estimate = true
                             rounding = 3
                             numBank = [(getRandomInt(9)*11.1).toFixed(2), (getRandomInt(9)*11.1).toFixed(2), (getRandomInt(9)*11.1).toFixed(2)];
                             problemText = `(*)$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]}$$`
                             correctAnswer = numBank[0]*numBank[1]*numBank[2];
                             break;
-                        
-                    }
+                    }   
                     break;
-                case 'hard': 
-                    switch (getRandomInt(5)) {
-                        case 1:
+                case 'medium': 
+                    switch(getRandomInt(12)) {
+                        case 1: 
+                            numBank = [getRandomInt(9), getRandomInt(9), getRandomInt(9), getRandomInt(9)];
+                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
+                            correctAnswer = numBank[0] * numBank[1] * numBank[2] * numBank[3] * 11;
+                            break;
+                        case 2: 
+                            numBank = [getRandomInt(9), getRandomInt(9), (getRandomInt(90) + 9), getRandomInt(9)];
+                            problemText = `$$${numBank[0]} \\times ${numBank[1]} \\times ${numBank[2]} \\times ${numBank[3]} \\times 11$$`
+                            correctAnswer = numBank[0] * numBank[1] * numBank[2] * 11;
+                            break;
+                        case 3: 
+                            numBank = [getRandomInt(9), getRandomInt(9)];
+                            problemText = `${numBank[0]}00${numBank[1]} x 111`
+                            correctAnswer = numBank[0] * 111000 + numBank[1] * 111;
+                            break;
+                        case 4: 
+                            numBank = [getRandomInt(9), getRandomInt(9)];
+                            problemText = `${numBank[0]}${numBank[0]}${numBank[1]}${numBank[1]} / 11`
+                            correctAnswer = numBank[0] * 100 + numBank[1];
+                            break;
+                        case 5: 
+                            rounding = 2
+                            numBank = [getRandomInt(9), getRandomInt(9)];
+                            problemText = `${numBank[0]}0.0${numBank[1]} x 11`
+                            correctAnswer = numBank[0] * 110 + numBank[1] * .11;
+                            break;
+                        case 6: 
+                            numBank = [getRandomInt(9), getRandomInt(9)];
+                            problemText = `${numBank[0]}00${numBank[1]} x 11`
+                            correctAnswer = numBank[0] * 11000 + numBank[1] * 11;
+                            break;
+                        case 7: 
+                            problemText = `$$11^4$$`
+                            correctAnswer = Math.pow(11, 4);
+                            break;
+                        case 8:
                             numBank = [(getRandomInt(90) + 9)];
                             problemText = `1111 x ${numBank[0]}`
                             correctAnswer = numBank[0] * 1111;
                             break;
-                        case 2:
+                        case 9:
                             numBank = [(getRandomInt(900) + 99)];
                             problemText = `111 x ${numBank[0]}`
                             correctAnswer = numBank[0] * 111;
                             break;
-                        case 3:
+                        case 10:
                             numBank = [(getRandomInt(900) + 99)];
                             problemText = `121 x ${numBank[0]}`
                             correctAnswer = numBank[0] * 121;
                             break;
-                        case 4:
+                        case 11:
                             numBank = [(getRandomInt(90) + 9), (getRandomInt(90) + 9)];
                             problemText = `$$11 \\times ${numBank[0]} \\times ${numBank[1]}$$`
                             correctAnswer = numBank[0] * 11 * numBank[1];
                             break;
-                        case 5:
+                        case 12:
                             numBank = [(getRandomInt(900) + 99)];
                             problemText = `1111 x ${numBank[0]}`
                             correctAnswer = numBank[0] * 1111;
+                            break;
+                    }
+                    break;
+                case 'hard': 
+                    switch (getRandomInt(2)) {
+                        case 1: 
+                            numBank = [(getRandomInt(900)+99)];
+                            problemText = `$$${numBank[0]*111} \\div 111$$`
+                            correctAnswer = numBank[0];
+                            break;
+                        case 2: 
+                            numBank = [(getRandomInt(90)+9)];
+                            problemText = `$$${numBank[0]*1111} \\div 1111$$`
+                            correctAnswer = numBank[0];
                             break;
                     }
             }
             
         },
         function() {
-            originTest = 'Multiplying by 101';
+            originTest = 'Heath NS Tricks 1.2.2';
             switch (difficulty) {
                 case 'easy':
                     switch (getRandomInt(6)) {
@@ -301,9 +322,52 @@ function generateProblem() {
             }
             
         },
+        function() {
+            originTest = 'Heath NS Tricks 1.2.3';
+            switch (difficulty) {
+                case 'easy':
+                    switch (getRandomInt(4)) {
+                        case 1:
+                            numBank = [(getRandomInt(90) + 9)];
+                            problemText = `$$${numBank[0]} \\times 25$$`
+                            correctAnswer = numBank[0] * 25;
+                            break;
+                        case 2:
+                            rounding = 2
+                            numBank = [((getRandomInt(90) + 9) / 10).toFixed(2)];
+                            problemText = `$$${numBank[0]} \\times 2.5$$`
+                            correctAnswer = numBank[0] * 2.5;
+                            break;
+                        case 3:
+                            rounding = 2
+                            numBank = [(getRandomInt(90) + 9)];
+                            problemText = `$$${numBank[0]} \\div 25$$`
+                            correctAnswer = numBank[0] / 25;
+                            break;
+                        case 4:
+                            rounding = 2
+                            numBank = [((getRandomInt(90) + 9) / 10).toFixed(2)];
+                            problemText = `$$${numBank[0]} \\div 2.5$$`
+                            correctAnswer = numBank[0] / 2.5;
+                            break;
+                    }
+                break;
+                case 'medium': 
+                    numBank = [(getRandomInt(9000) + 999)];
+                    problemText = `$$${numBank[0]} \\times 101$$`
+                    correctAnswer = numBank[0] * 101;
+                    break;
+                case 'hard': 
+                    numBank = [(getRandomInt(9000) + 999), getRandomInt(9)];
+                    problemText = `$$${numBank[0]} \\times ${101*numBank[1]}$$`
+                    correctAnswer = numBank[0] * 101 * numBank[1];
+                    break;
+            }
+            
+        }
     ];
 
-    operations[question]();
+    operations[getRandomInt(operations.length)-1]();
     document.getElementById("originTest").innerText = originTest;
     document.getElementById("problem").innerText = problemText;
     MathJax.typeset(); 

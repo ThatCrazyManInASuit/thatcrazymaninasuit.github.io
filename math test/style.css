@@ -112,7 +112,7 @@ h1 {
     transition: height .5s;
 }
 
-#quote.hide, #diff-title.hide {
+#quote.hide, #diff-title.hide, .diff-button.hide {
     height: 0;
 }
 
@@ -130,6 +130,26 @@ h1 {
     padding: 20px;
 }
 
+#custom-menu {
+    text-align: left;
+    justify-content: center;
+    transition: 
+        height .5s,
+        padding .5s;
+    ;
+    width: 80%;
+    height: 0px;
+    background-color: lightgray;
+    margin: auto;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 0px;
+}
+#custom-menu.show {
+    height: 100px;
+    padding: 15px;
+}
+
 #input-line {
     display: flex;
     justify-content: space-between; /* This will equally space the items */
@@ -143,9 +163,12 @@ h1 {
     background-color: lightgray;
     width: 20%;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: 
+        opacity 1s ease-in-out,
+        height .5s;
     height: 12vw;
     border-radius: 15px;
+    overflow: hidden;
 }
 
 .diff-button.fade-in {
@@ -179,6 +202,15 @@ h1 {
 .diff-button p:not(#set) {
     margin: 5% auto;
     font-size: 1.5vw;
+}
+
+#error {
+    color:red;
+    opacity: 0%;
+    transition: opacity .5s ease-in-out;
+}
+#error.show {
+    opacity: 100%;
 }
 
 #start {
