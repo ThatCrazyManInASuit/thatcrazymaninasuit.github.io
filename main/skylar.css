@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Asimovian&family=Outfit:wght@100..900&display=swap');
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(./font/Myfont-Regular.ttf);
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-family: "Outfit", sans-serif; 
+    z-index: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.section {
+  height: 100%;
+  width: 100%;
+}
+
+#section-i {
+  height: 100%;
+  width: 100%;
+}
+
+#banner {
+    height: 0px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.links {
+    font-size: 24pt;
+    color: white;
+    mix-blend-mode: difference;
+    text-shadow: 3px 3px #558abb;
+}
+
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+}
+
+.hover-underline-animation.center::after {
+  transform-origin: bottom center;
+}
+
+.hover-underline-animation.center:hover::after {
+  transform-origin: bottom center;
+}
+
+#skylar {
+  width: 100vw;
+  min-height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#skylar > p {
+  position: absolute;
+  font-size: 32pt;
+  color: white;
+  mix-blend-mode: difference;
+}
+
+#img-top {
+  z-index: -1;
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  object-fit: cover;
+  filter: blur(10px);
+  -webkit-filter: blur(16px);
+}
+
+#section-ii {
+  background-color: #558abb;
+}
+
+#section-iii {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+}
+
+.topic {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 25%;
+  position: relative; 
+  margin: 0;
+  overflow: clip;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 0px;
+  border-image-source: linear-gradient(180deg, #FF3A20, #29339B);
+}
+
+#photos {
+  background-image: url('../photos/16.jpg');
+  background-size: cover;
+}
+
+#music {
+  background-image: url('../photos/86.jpg');
+  background-size: cover;
+}
+
+#knowledge {
+  background-image: url('../photos/85.jpg');
+  background-size: cover;
+}
+
+#projects {
+  background-color: green;
+}
+
+.topic a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;  /* no underline */
+
+}
+
+.quote-container {
+  padding: 30px;
+  opacity: 0%;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.quote-box {
+  background: rgba(0, 0, 0, 0.66);
+  border-radius: 15px;
+  padding: 7px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  max-width: fit-content;
+  min-width: none;
+}
+
+.quote {
+  font-size: 12pt;
+  color: white;
+  font-family: myFirstFont;
+  font-style: bold;
+}
+
+.label {
+  position: absolute;
+  bottom: -100px; 
+  font-family: "Asimovian", sans-serif;
+  font-size: 100pt;
+  color: #ffffff;
+  text-shadow: 10px 10px #151515;
+}
+
+.quote-container:hover {
+  opacity: 100%;
+  animation: .5s 1 alternate show;
+}
+
+.quote-container:not(:hover) {
+  animation: .5s 1 alternate hide;
+}
+
+.topic:hover {
+  width: 75%;
+  animation: .5s 1 alternate grow;
+  border-width: 15px;
+}
+
+.topic:not(:hover) {
+    animation: .5s 1 alternate shrink;
+}
+
+@keyframes grow {
+  from {
+    width: 25%;
+    border-width: 0px;
+  }
+
+  to {
+    width: 75%;
+    border-width: 15px;
+  }
+}
+
+@keyframes shrink {
+  from {
+    width: 75%;
+    border-width: 15px;
+  }
+
+  to {
+    width: 25%;
+    border-width: 0px;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0%;
+  }
+  
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 100%;
+  }
+  
+  to {
+    opacity: 0%;
+  }
+}
