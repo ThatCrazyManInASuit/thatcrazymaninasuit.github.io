@@ -27,7 +27,8 @@ fetchJsonFile("custom.geo.json").then(data => {
     console.log(document.getElementById("canvasContainer").clientWidth);
     let centerX = taiwanPoints[0][0];
     let centerY = taiwanPoints[0][1];
-    const SIZE = 200;
+    const SIZE = 0.117 * window.innerWidth;
+    console.log(canvas.width)
     for (let i = 1; i < taiwanPoints.length; i++) { 
         centerX += taiwanPoints[i][0]
         centerY += taiwanPoints[i][1]
