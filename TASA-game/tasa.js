@@ -37,12 +37,14 @@ fetchJsonFile("custom.geo.json").then(data => {
     centerY = centerY/taiwanPoints.length;
     let offsetX = canvas.width/2
     let offsetY = canvas.height/2
+    /*
     for (let i = 1; i < taiwanPoints.length; i++) {
         ctx.beginPath();
         ctx.moveTo((taiwanPoints[i - 1][0] - centerX) * SIZE + offsetX, -(taiwanPoints[i - 1][1] - centerY) * SIZE + offsetY);
         ctx.lineTo((taiwanPoints[i][0] - centerX) * SIZE + offsetX, -(taiwanPoints[i][1] - centerY) * SIZE + offsetY);
         ctx.stroke();
     }
+    */
     for (let i = 1; i < taiwanPoints.length; i++) {
         taiwanPoints[i][0] = (taiwanPoints[i][0] - centerX) * SIZE + offsetX
         taiwanPoints[i][1] = -(taiwanPoints[i][1] - centerY) * SIZE + offsetY
